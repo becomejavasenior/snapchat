@@ -20,6 +20,9 @@ import java.util.stream.Collectors;
  * Created by apolonxviii on 22.09.17.
  */
 public class ImageUploader {
+
+    static private final int PORT = 8082;
+
     public static void main(String[] args) throws Exception {
         //Test data -f /Users/apolonxviii/Pictures/BecomeJavaSenior-Logo-5-mini.png -t 3000
         CommandLine cmd = parseParameters(args);
@@ -30,12 +33,14 @@ public class ImageUploader {
         System.out.println("arg time: " + time);
 
         File file = new File(inputFilePath);
-        String path = postFile(file, time);
-
+        String path1 = postFile(file, time);
+        String path2 = postFile(file, time);
         //Handle sleep time to check how image validating is working
         //4000 or more to be shure that image is not avalaible already
-        Thread.sleep(4000);
-        getFile(path);
+        Thread.sleep(2000);
+        getFile(path1);
+        Thread.sleep(2000);
+        getFile(path2);
     }
 
     private static String postFile(File file, String time) throws IOException, URISyntaxException {
@@ -43,7 +48,7 @@ public class ImageUploader {
         URI uri = new URIBuilder()
                 .setScheme("http")
                 .setHost("localhost")
-                .setPort(8082)
+                .setPort(PORT)
                 .setPath("/image")
                 .addParameter("time", time)
                 .build();
@@ -67,7 +72,7 @@ public class ImageUploader {
         URI uri = new URIBuilder()
                 .setScheme("http")
                 .setHost("localhost")
-                .setPort(8082)
+                .setPort(PORT)
                 .setPath("/image/" + path)
                 .build();
         HttpGet httpGet = new HttpGet(uri);

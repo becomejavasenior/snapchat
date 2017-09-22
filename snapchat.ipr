@@ -22,9 +22,9 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="1.8">
-      <module name="httpclient" target="1.5" />
-      <module name="httpserver" target="1.5" />
-      <module name="snapchat" target="1.5" />
+      <module name="httpclient" target="1.8" />
+      <module name="httpserver" target="1.8" />
+      <module name="snapchat" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="Encoding">
