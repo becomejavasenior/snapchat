@@ -14,19 +14,10 @@ import javax.ws.rs.core.Response;
 @Path("image")
 public class ImageService {
 
-    private static boolean isNumeric(String str) {
-        try {
-            Double.parseDouble(str);
-        } catch (NumberFormatException nfe) {
-            return false;
-        }
-        return true;
-    }
-
     @POST
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.APPLICATION_OCTET_STREAM)
-    public String getIt(byte[] file, @QueryParam("time") long time) throws SchedulerException {
+    public String saveImage(byte[] file, @QueryParam("time") long time) throws SchedulerException {
         Image img = new Image(file, System.currentTimeMillis() + time);
 
         String path = ImageHolder.putImages(img);
@@ -37,7 +28,7 @@ public class ImageService {
     @GET
     @Path("/{path}")
     @Produces(MediaType.APPLICATION_OCTET_STREAM)
-    public Response removeMessage(@PathParam("path") String path) {
+    public Response getImage(@PathParam("path") String path) {
         try {
             Image img = ImageHolder.getImage(path);
             if (img != null) {
@@ -50,5 +41,4 @@ public class ImageService {
                     .entity("Error").build();
         }
     }
-
 }

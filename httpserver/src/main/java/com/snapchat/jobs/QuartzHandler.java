@@ -13,7 +13,6 @@ public class QuartzHandler {
     public static void shedule(Class<? extends org.quartz.Job> className) throws SchedulerException {
         JobDetail job = JobBuilder.newJob(className)
                 .withIdentity("Validate Image", "image group")
-                //.usingJobData("path", path)
                 .build();
         Scheduler scheduler = new StdSchedulerFactory().getScheduler();
         scheduler.start();
